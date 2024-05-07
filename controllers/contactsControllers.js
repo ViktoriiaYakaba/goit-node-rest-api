@@ -3,7 +3,7 @@ import HttpError from "../helpers/HttpError.js";
 
 export const getAllContacts =  (req, res) => {
     const results =  contactsService.listContacts();
-    res.status(200).JSON(results);
+    res.JSON(results);
 };
 
 export const getOneContact = (req, res) => {
