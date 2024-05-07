@@ -1,7 +1,9 @@
 import contactsService from "../services/contactsServices.js";
+import HttpError from "../helpers/HttpError.js";
 
-export const getAllContacts = (req, res) => {
-
+export const getAllContacts =  (req, res) => {
+    const contacts =  contactsService.listContacts();
+    res.status(200).JSON(contacts);
 };
 
 export const getOneContact = (req, res) => {
