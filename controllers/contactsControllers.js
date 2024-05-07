@@ -2,12 +2,12 @@ import contactsService from "../services/contactsServices.js";
 import HttpError from "../helpers/HttpError.js";
 
 export const getAllContacts =  (req, res) => {
-    const contacts =  contactsService.listContacts();
-    res.status(200).JSON(contacts);
+    const results =  contactsService.listContacts();
+    res.status(200).JSON(results);
 };
 
 export const getOneContact = (req, res) => {
-
+   
 };
 
 export const deleteContact = (req, res) => {
