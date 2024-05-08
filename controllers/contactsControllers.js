@@ -5,8 +5,9 @@ const addSchema = require("../schemas/contactsSchemas");
 
 
  const getAllContacts =  async (req, res, next) => {
-   try {const results =  await contactsService.listContacts();
-       res.JSON(results);
+     try {
+        const results = await contactsService.listContacts();
+        res.json(results);
    }
    catch (error) {
        next(error)
@@ -20,7 +21,7 @@ const getOneContact = async(req, res, next) => {
         if (!results) {
             throw HttpError(404, 'Not found');
         }
-        res.JSON(results);
+        res.json(results);
     }
     catch (error) {
        next(error)
@@ -33,9 +34,9 @@ const getOneContact = async(req, res, next) => {
         const { id } = req.params;
         const results = await contactsService.deleteContact(id);
         if (!results) {
-            throw HttpError(404);
+            throw HttpError(404, "Contact not found");
         }
-        res.JSON({
+        res.json({
             message: "Delete sucess"
         }) 
     }
@@ -60,7 +61,7 @@ const getOneContact = async(req, res, next) => {
 
 };
 
-const updateContact = async(req, res) => {
+const updateContact = async(req, res, next) => {
     try {
         
     }
