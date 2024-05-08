@@ -1,23 +1,79 @@
-import contactsService from "../services/contactsServices.js";
-import HttpError from "../helpers/HttpError.js";
+const contactsService = require("../services/contactsServices");
+const HttpError =require( "../helpers/HttpError");
+const addSchema = require("../schemas/contactsSchemas");
 
-export const getAllContacts =  (req, res) => {
-    const results =  contactsService.listContacts();
-    res.JSON(results);
+
+
+ const getAllContacts =  async (req, res, next) => {
+   try {const results =  await contactsService.listContacts();
+       res.JSON(results);
+   }
+   catch (error) {
+       next(error)
+    }
 };
 
-export const getOneContact = (req, res) => {
-   
+const getOneContact = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const results = await contactsService.getContactById(id);
+        if (!results) {
+            throw HttpError(404, 'Not found');
+        }
+        res.JSON(results);
+    }
+    catch (error) {
+       next(error)
+    }
+
 };
 
-export const deleteContact = (req, res) => {
+ const deleteContact = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const results = await contactsService.deleteContact(id);
+        if (!results) {
+            throw HttpError(404);
+        }
+        res.JSON({
+            message: "Delete sucess"
+        }) 
+    }
+    catch (error) {
+        next(error);
+    }
 
 };
 
-export const createContact = (req, res) => {
+ const createContact = async(req, res, next) => {
+    try {
+         const { error } = addSchema.validate(req.body);
+        if (error){
+            throw HttpError(400, error.message)
+        }
+        const results = await contactsService.addContact();
+        res.status(201).json(results);
+    }
+    catch (error) {
+       next(error)
+    }
 
 };
 
-export const updateContact = (req, res) => {
+const updateContact = async(req, res) => {
+    try {
+        
+    }
+    catch (error) {
+        next(error)
+    }
     
 };
+
+module.exports = {
+    getAllContacts,
+    getOneContact,
+    deleteContact,
+    createContact, 
+    updateContact,
+}
