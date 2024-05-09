@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const { contactsRouter } = require("./routes/contactsRouter.js"); // Assicurati di importare il router correttamente
+const { contactsRouter } = require("./routes/contactsRouter");
 
 const app = express();
 

@@ -6,6 +6,7 @@ const {
   createContact,
   updateContact,
 } = require("../controllers/contactsControllers");
+const validateBody = require("../helpers")
 
 const contactsRouter = express.Router();
 
@@ -15,8 +16,8 @@ contactsRouter.get("/:id", getOneContact);
 
 contactsRouter.delete("/:id", deleteContact);
 
-contactsRouter.post("/", createContact);
+contactsRouter.post("/", validateBody(createContact));
 
-contactsRouter.put("/:id", updateContact);
+contactsRouter.put("/:id", validateBody(updateContact));
 
 module.exports = {contactsRouter};
