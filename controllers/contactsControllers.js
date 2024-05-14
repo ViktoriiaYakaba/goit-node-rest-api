@@ -2,9 +2,11 @@ const contactsService = require("../services/contactsServices");
 const { HttpError, ErrorHandler } = require("../helpers");
 const { addSchema } = require("../schemas/contactsSchemas")
 
+const Contact =require("../models/contacts")
+
 
  const getAllContacts =  async (req, res) => {
-        const results = await contactsService.listContacts();
+        const results = await Contact.find();
         res.json(results);
 };
 
@@ -29,7 +31,7 @@ const getOneContact = async(req, res) => {
 };
 
  const createContact = async(req, res, next) => {
-        const results = await contactsService.addContact(req.body);
+        const results = await Contact.create(req.body);
         res.status(201).json(results);
 };
 
