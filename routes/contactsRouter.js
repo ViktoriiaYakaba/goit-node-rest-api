@@ -26,4 +26,4 @@ contactsRouter.put("/:id", isValidId, validateBody(shemas.addSchema), updateCont
 
 contactsRouter.patch("/:id/favorite", isValidId, validateBody(shemas.updateFavoriteSchema), updateStatusContact);
 
-module.exports = {contactsRouter};
+module.exports = contactsRouter;

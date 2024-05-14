@@ -5,15 +5,13 @@ const Joi = require("joi");
 const contactSchema = new Schema({
     name: {
         type: String,
-        required: true,
+        require: [true, 'Set name for contact'],
     },
     email: {
         type: String,
-        required: true,
     },
     phone: {
         type: String,
-        required: true,
     },
     favorite: {
         type: Boolean,
