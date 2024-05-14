@@ -9,7 +9,7 @@ const { Contact } = require("../models/contacts");
 
 const getOneContact = async(req, res) => {
         const { id } = req.params;
-        const results = await Contact.findById(id);
+        const results = await Contact.findById({_id: id});
         if (!results) {
             throw HttpError(404, 'Not found');
         }
